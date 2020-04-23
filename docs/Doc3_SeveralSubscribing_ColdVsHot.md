@@ -32,7 +32,6 @@ public static Observable<String> getColdObservables() {
         );
     }
 ```
-
 A second one, more hot style, is a lottery like. Every second a number
 is picked in 0..1_000, if this number is more than 800, we win and the
 event is emitted. The loto is over when 5 winners are found.
@@ -67,7 +66,6 @@ public static Observable<Integer> getHotObservable() {
     return hotObserable;
 }
 ```
-
 Now let's create two observers that will observe those observables.
 
 ## 2 Observers subscribe() to a cold Observable in the same Thread
@@ -78,7 +76,7 @@ This will show that:
   the second one starts) So the code is the following to test this
   behavior:
 
-```Java
+```java
 @Test
 public void testColdObservable(){
     Observable<String> observable= Answer3_SeveralSubscribing_ColdVsHot.getColdObservables();
@@ -112,7 +110,6 @@ public void testColdObservable(){
     }
 }
 ```
-
 The result is clear:
 
 ```text
@@ -164,7 +161,6 @@ public void testHotObservable(){
     );
 }
 ```
-
 We obtain the following output:
 
 ```text
@@ -239,7 +235,6 @@ chapter.
         }
     }
 ```
-
 The output is :
 
 ```
@@ -287,7 +282,6 @@ After the creation of the Observable, we need to call publish.
 ```java
 getHotObservable().publish();
 ```
-
 When the observers have been subscribing to the observable, you call
 connect on it, it will launch the emission.
 
@@ -311,7 +305,6 @@ System.out.println("Calling connect");
 connectableObservable.connect();
 System.out.println("Connect is over");
 ```
-
 Using this pattern, we will receive in both observers the same dataset, sequentially:
 
 ```text
@@ -331,3 +324,10 @@ Using this pattern, we will receive in both observers the same dataset, sequenti
 Only one instance of the Observable is created.  
 The onNext method runs the one after the other, in a sequential non blocking way.  
 Calling connect() is blocking the Thread until the emission is over.
+
+
+# What to remember
+[Chapter 2 : Observers](Doc2_Observer.md)  
+[Chapter 3: What happened when several observers subscribe to the same Observable? Hot Observable Versus Cold Observable](Doc3_SeveralSubscribing_ColdVsHot.md)
+
+[What to remember]: #what-to-remember

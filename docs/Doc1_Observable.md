@@ -7,7 +7,7 @@ By the way the rule is:
 ## create()
 Your just need to provide a lambda where the parameter is the emiter and
 call onNext or onComplete on it:  
-```Java
+```java
         Observable<String> toto= Observable.create(
                 emiter -> {
                     emiter.onNext("Monday");
@@ -47,3 +47,5 @@ Your just need to provide the list of elements to emit:
         );
         return Observable.fromIterable(weekDays);
 ```
+
+[Chapter 2 : Observers](Doc2_Observer.md)

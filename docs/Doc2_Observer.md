@@ -1,5 +1,8 @@
 # Chapter 2: Observer
-Creating an Observer to listen for the data stream of observable. Let's suppose we have the observable from chapter one:
+
+Creating an Observer to listen for the data stream of observable. Let's
+suppose we have the observable from chapter one:
+
 ```java
 Observable<String> observable= Observable.just(
                 "Monday",
@@ -11,16 +14,23 @@ Observable<String> observable= Observable.just(
                 "Sunday"
         );
 ```
-We would like to know the number of days in a week emitted, so we need to be sure the emission is finished. And we will test it like this:
+
+We would like to know the number of days in a week emitted, so we need
+to be sure the emission is finished. And we will test it like this:
+
 ```java
         observable.subscribe(observer);
         Assert.assertEquals(Boolean.TRUE, Answer2_Observer.jobIsDone);
         Assert.assertEquals(7,0+ Answer2_Observer.numberOfDayInTheWeek);
 ```
+
 The goal is to create the ``` observer ```
+
 ## subscribe() with an observer instance
+
 So let's create an instance of an observer
-```Java
+
+```java
 int dayOfWeekNumber = 0;
 new Observer<String>() {
             @Override
@@ -44,8 +54,12 @@ new Observer<String>() {
             }
         };
 ```
+
 ## subscribe() with lambdas
-Your just need to pass directly the lambda function to the method **subscribe** as its parameters. It's the usual way.
+
+Your just need to pass directly the lambda function to the method
+**subscribe** as its parameters. It's the usual way.
+
 ```java
     private static int dayOfWeekNumber = 0;
 
@@ -66,8 +80,11 @@ Your just need to pass directly the lambda function to the method **subscribe** 
 ```
 
 ## The three lambda ways
+
 You can omit onError (but you shouldn't) and onComplete (if you want).  
-Let's have a remark before keep going. Lambda can be passed in different ways:
+Let's have a remark before keep going. Lambda can be passed in different
+ways:
+
 ```java
         // OnNext using method shortcut call
         observable.subscribe(
@@ -89,3 +106,5 @@ Let's have a remark before keep going. Lambda can be passed in different ways:
 [subscribe() with an observer instance]: #subscribe-with-an-observer-instance
 
 
+[Chapter 1 : Observables](Doc1_Observable.md)  
+[Chapter 3: What happened when several observers subscribe to the same Observable? Hot Observable Versus Cold Observable](Doc3_SeveralSubscribing_ColdVsHot.md)
