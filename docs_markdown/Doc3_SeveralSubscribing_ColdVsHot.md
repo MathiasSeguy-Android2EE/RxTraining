@@ -78,7 +78,7 @@ This will show that:
   the second one starts) So the code is the following to test this
   behavior:
 
-```Java
+```java
 @Test
 public void testColdObservable(){
     Observable<String> observable= Answer3_SeveralSubscribing_ColdVsHot.getColdObservables();
@@ -112,7 +112,6 @@ public void testColdObservable(){
     }
 }
 ```
-
 The result is clear:
 
 ```text
@@ -239,7 +238,6 @@ chapter.
         }
     }
 ```
-
 The output is :
 
 ```
@@ -287,7 +285,6 @@ After the creation of the Observable, we need to call publish.
 ```java
 getHotObservable().publish();
 ```
-
 When the observers have been subscribing to the observable, you call
 connect on it, it will launch the emission.
 
@@ -311,7 +308,6 @@ System.out.println("Calling connect");
 connectableObservable.connect();
 System.out.println("Connect is over");
 ```
-
 Using this pattern, we will receive in both observers the same dataset, sequentially:
 
 ```text
@@ -331,3 +327,8 @@ Using this pattern, we will receive in both observers the same dataset, sequenti
 Only one instance of the Observable is created.  
 The onNext method runs the one after the other, in a sequential non blocking way.  
 Calling connect() is blocking the Thread until the emission is over.
+
+
+
+[Chapter 2 : Observers](Doc2_Observer.md)  
+[Chapter 3: What happened when several observers subscribe to the same Observable? Hot Observable Versus Cold Observable](Doc3_SeveralSubscribing_ColdVsHot.md)

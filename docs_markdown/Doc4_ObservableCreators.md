@@ -326,4 +326,9 @@ The onNext method runs the one after the other, in a sequential non blocking way
 Calling connect() is blocking the Thread until the emission is over.
 
 
+# What to [What to remember]
+
+[Chapter 3: What happened when several observers subscribe to the same Observable? Hot Observable Versus Cold Observable](Doc3_SeveralSubscribing_ColdVsHot.md)
+
+[What to remember]: #what-to-remember
 

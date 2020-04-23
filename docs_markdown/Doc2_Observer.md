@@ -20,7 +20,7 @@ We would like to know the number of days in a week emitted, so we need to be sur
 The goal is to create the ``` observer ```
 ## subscribe() with an observer instance
 So let's create an instance of an observer
-```Java
+```java
 int dayOfWeekNumber = 0;
 new Observer<String>() {
             @Override
@@ -89,3 +89,6 @@ Let's have a remark before keep going. Lambda can be passed in different ways:
 [subscribe() with an observer instance]: #subscribe-with-an-observer-instance
 
 
+
+[Chapter 1 : Observables](Doc1_Observable.md)  
+[Chapter 3: What happened when several observers subscribe to the same Observable? Hot Observable Versus Cold Observable](Doc3_SeveralSubscribing_ColdVsHot.md)
