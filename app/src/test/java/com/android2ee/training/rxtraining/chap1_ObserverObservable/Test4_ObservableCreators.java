@@ -1,5 +1,7 @@
 package com.android2ee.training.rxtraining.chap1_ObserverObservable;
 
+import com.android2ee.training.rxtraining.PrintInColorKt;
+
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
@@ -9,8 +11,8 @@ import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicBoolean;
 
+import io.reactivex.Observable;
 import io.reactivex.disposables.Disposable;
-import io.reactivex.schedulers.Schedulers;
 // 
 
 /**
@@ -85,62 +87,68 @@ public class Test4_ObservableCreators {
                 () -> Assert.fail("Error should not emit data"));
     }
 
-    CountDownLatch countDownLatch = new CountDownLatch(1);
-    int numberOfLoop = 0;
+    /***********************************************************
+     *  Understanding Defer:
+     *  It will rerun the factory your provide to it
+     **********************************************************/
 
+    int numberOfLoop = 0, numberOfLoop1 = 0, numberOfLoop2 = 0;
+
+    /**
+     * The output is showing that using defer will resolve the problem
+     * Reference Obs toto integer 1
+     * NoDefer Obs toto integer 1[Thread] RxComputationThreadPool-2
+     * Reference Obs toto integer 2
+     * NoDefer Obs toto integer 2[Thread] RxComputationThreadPool-2
+     * WithDefer Obs toto integer 1[Thread] RxComputationThreadPool-3
+     * Reference Obs toto integer 3
+     * NoDefer Obs toto integer 3[Thread] RxComputationThreadPool-2
+     * Reference Obs toto integer 4
+     * NoDefer Obs toto integer 4[Thread] RxComputationThreadPool-2
+     * WithDefer Obs toto integer 2[Thread] RxComputationThreadPool-3
+     */
     @Test
-    public void testObservableDefer() {
-        CountDownLatch countDownLatch = new CountDownLatch(1);
-        Disposable disposable = Answer4_Observable_Creators.getDefer()
-                .subscribeOn(Schedulers.computation())
-                .doOnNext(letter -> {
+    public void testObservableDefer2() {
+        //using a simple observable, you can not change its behavior
+        Observable observable = Answer4_Observable_Creators.getDefer();
+        //using defer you can change the behavior by re-running the factory when each observer subscribe to it
+        Observable observableDefered = Observable.defer(() -> Answer4_Observable_Creators.getDefer()/* The factory of the Defer*/);
+        observableDefered.subscribe(letter -> {
                     numberOfLoop++;
-                    switch (numberOfLoop) {
-                        case 0:
-                            Answer4_Observable_Creators.text = "Bob";
-                            break;
-                        case 1:
-                            Answer4_Observable_Creators.text = "Joh";
-                            break;
-                        case 2:
-                            Answer4_Observable_Creators.text = "Jhonny";
-                            break;
-                        case 3:
-                            Answer4_Observable_Creators.text = "patate";
-                            break;
-                        case 4:
-                            Answer4_Observable_Creators.text = "nouille";
-                            break;
-                        case 5:
-                            Answer4_Observable_Creators.text = "hole";
-                            break;
-                        case 6:
-                            Answer4_Observable_Creators.text = "quatre";
-                            break;
-                        default:
-                            Answer4_Observable_Creators.text = "toto";
-                    }
-                    if (numberOfLoop == 3) {
-                        System.out.println(numberOfLoop);
-                        countDownLatch.countDown();
-                    }
-                })
-                .subscribe(letter -> {
-                            System.out.println(letter + " " + numberOfLoop);
-                        },
-                        th -> System.out.println("UndeliverableException should be received"),//not called
-                        () -> System.out.println("On cmoplete is called"));//not called
+                    System.out.println("Reference " + letter + " " + numberOfLoop);
+                },
+                th -> System.out.println("UndeliverableException should be received"),//not called
+                () -> System.out.println("On complete is called"));//not called
 
-//       Disposable dispo2= Answer4_Observable_Creators.getDefer().subscribe(item->{
-//            System.out.println(item + " " + numberOfLoop);
-//        });
+        //Without Defer, the same observer is used, so your changes won't be took into account
+        Answer4_Observable_Creators.timeInterval = 2;
+        observable.subscribe(letter -> {
+                    numberOfLoop1++;
+                    PrintInColorKt.println("NoDefer " + letter + " " + numberOfLoop1 + "[Thread] " + Thread.currentThread().getName(),
+                            PrintInColorKt.ANSI_BLUE);
+                },
+                th -> System.out.println("UndeliverableException should be received"),//not called
+                () -> System.out.println("On complete is called"));//not called
+//        //Proof of no changes
+        Assert.assertEquals(numberOfLoop, numberOfLoop1);
+
+        //With Defer, the observer is recreated by calling again Answer4_Observable_Creators.getDefer(),
+        // so your changes will be took into account because a brand new Observable is created
+        observableDefered.subscribe(letter -> {
+                    numberOfLoop2++;
+                    PrintInColorKt.println("WithDefer " + letter + " " + numberOfLoop2 + "[Thread] " + Thread.currentThread().getName(),
+                            PrintInColorKt.ANSI_GREEN);
+                },
+                th -> System.out.println("UndeliverableException should be received"),//not called
+                () -> System.out.println("On complete is called"));//not called
+        //Proof of changes
+        Assert.assertEquals(numberOfLoop * 2, numberOfLoop2);
+
+        //wait 6 iteration
         try {
-            countDownLatch.await();
+            Thread.sleep(6_000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        System.out.println("CountDown is dead");
-        disposable.dispose();//hard crash with Thread.
-//        dispo2.dispose();
     }
 }

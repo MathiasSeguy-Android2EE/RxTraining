@@ -53,6 +53,7 @@ public class Answer4_Observable_Creators {
 
 
     public static String text = "toto";
+    public static int timeInterval = 1;
 
     /**
      * do not create the Observable until the observer subscribes,
@@ -61,22 +62,16 @@ public class Answer4_Observable_Creators {
      * @return An observable that can update its internal state
      */
     public static Observable<String> getDefer() {
-        //Create a ticker that emits every second
-        //Update it according to an inner parameter to tick every 2 seconds for the second observer
-        Observable<String> observable = Observable.create(
-                emiter -> {
-                    while (!emiter.isDisposed()) {
-                        emiter.onNext(Answer4_Observable_Creators.text);
-//                        try {
-//                            Thread.sleep(1_000);
-//                        } catch (InterruptedException e) {
-//                            e.printStackTrace();
-//                        }
-//                        System.out.println("Hello ");
-                    }
-                    emiter.onComplete();
+        //Create a ticker that emits every timeInterval second:
+        Observable<String> observable2 = Observable
+                .interval(timeInterval, TimeUnit.SECONDS)
+                .map(integer -> {
+                    return "Obs " + Answer4_Observable_Creators.text + " integer";
                 });
-        return observable;
+        return observable2;
+        //It works with every creator you already know
+//        return Observable.range(0, timeInterval*4)
+//                .map(integer -> "Obs " + Answer4_Observable_Creators.text + " integer");
     }
 
 }

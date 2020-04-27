@@ -1,6 +1,10 @@
 package com.android2ee.training.rxtraining.chap1_ObserverObservable.questions;
 //
 
+import com.android2ee.training.rxtraining.chap1_ObserverObservable.Answer4_Observable_Creators;
+
+import java.util.concurrent.TimeUnit;
+
 import io.reactivex.Observable;
 
 /**
@@ -49,13 +53,22 @@ public class Question4_Observable_Creators {
         return null;
     }
 
+    public static int timeInterval = 1;
     /**
      * @return An observable that can update its internal state
      */
     public static Observable<String> getDefer() {
         //Create a ticker that emits every second
         //Update it according to an inner parameter to tick every 2 seconds for the second observer
-
-        return null;
+        //using the timeInterval parameter
+        //The constraint here is you can only call this method once, when you retrieve the Observable for te first time
+        //Create a ticker that emits every timeInterval second:
+        Observable<String> observable2 = Observable
+                .interval(timeInterval, TimeUnit.SECONDS)
+                .map(integer -> {
+                    return "Obs " + Answer4_Observable_Creators.text + " integer";
+                });
+        //the solution is on the test side
+        return observable2;
     }
 }
