@@ -1,5 +1,7 @@
 package com.android2ee.training.rxtraining
 
+import java.io.PrintStream
+
 
 // 
 /** Created by Mathias Seguy also known as Android2ee on 20/03/2020.
@@ -19,4 +21,10 @@ const val ANSI_WHITE = "\u001B[37m"
 
 fun println(message: String, color: String) {
     println(color + message + ANSI_RESET)
+    System.out
+}
+
+fun PrintStream.printLn(message: String, color: String) {
+    println(color + message + ANSI_RESET)
+    System.out
 }
