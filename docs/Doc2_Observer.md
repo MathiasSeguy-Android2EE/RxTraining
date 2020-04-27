@@ -104,6 +104,7 @@ ways:
 
 [Chapter 2: Observer]: #chapter-2-observer
 [subscribe() with an observer instance]: #subscribe-with-an-observer-instance
+[TableOfContent](index.md)
 
 
 [Chapter 1 : Observables](Doc1_Observable.md)  

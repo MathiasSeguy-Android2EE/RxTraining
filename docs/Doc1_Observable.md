@@ -49,3 +49,4 @@ Your just need to provide the list of elements to emit:
 ```
 
 [Chapter 2 : Observers](Doc2_Observer.md)
+[TableOfContent](index.md)

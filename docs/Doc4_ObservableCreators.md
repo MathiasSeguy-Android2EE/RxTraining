@@ -1,4 +1,4 @@
-# Chapter a: Observable simple creators
+# Chapter 4: Observable simple creators
 
 We will see a list of methods to create Observables. We already have
 seen:
@@ -199,11 +199,13 @@ Reference Obs toto integer 4
 WithDefer Obs toto integer 2[Thread] RxComputationThreadPool-2
 ```
 ### Conclusion
-In some case, you would like to uopdate the Observable every time a new observer is subscribing on it. To do that a simple trick is to use Defer and its factory.  
+In some case, you would like to update the Observable every time a new observer is subscribing on it. To do that a simple trick is to use Defer and its factory.  
 You'll be able to recreate your observable.
 
 
 [Chapter 3: What happened when several observers subscribe to the same Observable? Hot Observable Versus Cold Observable](Doc3_SeveralSubscribing_ColdVsHot.md)
+[Chapter 5 : Dispoable, Single, Maybe and Completable concepts](Doc5_SpeicifcObservables.md)  
+[TableOfContent](index.md)
 
 [Range]: #range
 [Interval]: #interval

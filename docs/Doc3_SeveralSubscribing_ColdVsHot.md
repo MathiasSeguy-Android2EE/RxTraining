@@ -328,6 +328,7 @@ Calling connect() is blocking the Thread until the emission is over.
 
 # What to remember
 [Chapter 2 : Observers](Doc2_Observer.md)  
-[Chapter 3: What happened when several observers subscribe to the same Observable? Hot Observable Versus Cold Observable](Doc3_SeveralSubscribing_ColdVsHot.md)
+[Chapter 4 : Observables Basics Creators](Doc4_ObservableCreators.md)
+[TableOfContent](index.md)
 
 [What to remember]: #what-to-remember
