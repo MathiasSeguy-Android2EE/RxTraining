@@ -1,4 +1,4 @@
-# [Chapter 6: Observable operators]
+# [Chapter 7: Observable transformers operators]
 We will see the following operators on Observables:
 - map (and flatMap)
 - cast
@@ -181,9 +181,8 @@ It helps you sorts the items emitted. Has to wait the onComplete. Sorted objects
 [Chapter 4 : Observables Basics Creators](Doc4_ObservableCreators.md)  
 [TableOfContent](index.md)
 
-[Chapter 6: Observable operators]: #chapter-6-observable-operators
 
-
+[Chapter 7: Observable transformers operators]: #chapter-7-observable-transformers-operators
 
 
 
