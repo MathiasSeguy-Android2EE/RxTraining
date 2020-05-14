@@ -45,6 +45,9 @@ I will let you emit a tick every second or any period you want:
 
 You also have some range to add an initial delay, to use a specific
 scheduler or use intervalRange for emitting integer or long.
+** WARNING when using interval, the subscribe is not blocking the Thread.  
+ It's a non blocking observable. It will call the method and drop it in the Thread.**
+
 
 ## [Empty, never and error]
 

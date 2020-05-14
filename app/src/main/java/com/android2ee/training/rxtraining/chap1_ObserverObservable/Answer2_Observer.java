@@ -55,27 +55,27 @@ public class Answer2_Observer {
                     jobIsDone = true;
                 }//using explicit lambda
         );
-        // OnNext using method shortcut call
-        observable.subscribe(
-                Answer2_Observer::onNextDay
-        );
-        // OnNext using method shortcut call
-        observable.subscribe(
-                dayOfWeek -> onNextDay(dayOfWeek)
-        );
-        // OnNext using method shortcut call
-        observable.subscribe(
-                dayOfWeek -> {
-                    onNextDay(dayOfWeek);
-                }
-        );
+//        // OnNext using method shortcut call
+//        observable.subscribe(
+//                Answer2_Observer::onNextDay
+//        );
+//        // OnNext using method shortcut call
+//        observable.subscribe(
+//                dayOfWeek -> onNextDay(dayOfWeek)
+//        );
+//        // OnNext using method shortcut call
+//        observable.subscribe(
+//                dayOfWeek -> {
+//                    onNextDay(dayOfWeek);
+//                }
+//        );
     }
 
     private static int dayOfWeekNumber = 0;
 
     private static void onNextDay(String str) {
         dayOfWeekNumber++;
-        numberOfDayInTheWeek++;
+//        numberOfDayInTheWeek++;
         System.out.println("Day " + dayOfWeekNumber + " " + str);
     }
 }
