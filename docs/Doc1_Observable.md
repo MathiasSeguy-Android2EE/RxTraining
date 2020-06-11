@@ -1,6 +1,6 @@
 # Chapter 1: Observable
-Creating an Observable in a simple way can be done using.
-By the way the rule is:  
+In this chapter we create Observables in a simple way.  
+By the way the rule to observe them is:  
  **observable.subscribe(observer);**  
  But let's first create an observable that we could later observe...
 
@@ -17,6 +17,7 @@ call onNext or onComplete on it:
                     emiter.onNext("Friday");
                     emiter.onNext("Saturday");
                     emiter.onNext("Sunday");
+                    emiter.onComplete();
                 }
 ```
 ## just()

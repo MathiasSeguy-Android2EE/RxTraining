@@ -230,7 +230,6 @@ The distinct operators are the following:
 
 [Chapter 5 : Dispoable, Single, Maybe and Completable concepts](Doc5_SpeicifcObservables.md)  
 [Chapter 7 : Observables's Transformer Operators](Doc7_ObservableTransformerOperator.md)  
-[Chapter 4 : Observables Basics Creators](Doc4_ObservableCreators.md)  
 [TableOfContent](index.md)
 
 [Chapter 6: Observable operators]: #chapter-6-observable-operators

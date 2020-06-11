@@ -13,6 +13,9 @@ import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 import io.reactivex.disposables.Disposable;
+
+import static com.android2ee.training.rxtraining.chap1_ObserverObservable.TestUtils.assertListEquals;
+import static com.android2ee.training.rxtraining.chap1_ObserverObservable.TestUtils.assertLongListEquals;
 // 
 
 /**
@@ -66,9 +69,7 @@ public class Test6_ObservableOpertaor {
                         Throwable::printStackTrace,
                         () -> System.out.println("OnComplete is called"));
 
-        for (int i = 0; i < expectedItems.size(); i++) {
-            Assert.assertEquals(expectedItems.get(i), receivedItems.get(i));
-        }
+        assertListEquals(receivedItems, expectedItems);
     }
 
 
@@ -101,9 +102,7 @@ public class Test6_ObservableOpertaor {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        for (int i = 0; i < expectedItems.size(); i++) {
-            Assert.assertEquals(expectedItems.get(i), receivedItems.get(i));
-        }
+        assertLongListEquals(receivedItems, expectedItems);
     }
 
     /**
@@ -124,9 +123,7 @@ public class Test6_ObservableOpertaor {
                         Throwable::printStackTrace,
                         () -> System.out.println("OnComplete is called"));
 
-        for (int i = 0; i < expectedItems.size(); i++) {
-            Assert.assertEquals(expectedItems.get(i), receivedItems.get(i));
-        }
+        assertListEquals(receivedItems, expectedItems);
     }
 
     /**
@@ -148,9 +145,7 @@ public class Test6_ObservableOpertaor {
                         Throwable::printStackTrace,
                         () -> System.out.println("OnComplete is called"));
 
-        for (int i = 0; i < expectedItems.size(); i++) {
-            Assert.assertEquals(expectedItems.get(i), receivedItems.get(i));
-        }
+        assertListEquals(receivedItems, expectedItems);
     }
 
     /**
@@ -173,9 +168,7 @@ public class Test6_ObservableOpertaor {
                         Throwable::printStackTrace,
                         () -> System.out.println("OnComplete is called"));
 
-        for (int i = 0; i < expectedItems.size(); i++) {
-            Assert.assertEquals(expectedItems.get(i), receivedItems.get(i));
-        }
+        assertListEquals(receivedItems, expectedItems);
     }
 
     /**
@@ -197,9 +190,7 @@ public class Test6_ObservableOpertaor {
                         Throwable::printStackTrace,
                         () -> System.out.println("OnComplete is called"));
 
-        for (int i = 0; i < expectedItems.size(); i++) {
-            Assert.assertEquals(expectedItems.get(i), receivedItems.get(i));
-        }
+        assertListEquals(receivedItems, expectedItems);
     }
 
 
@@ -223,9 +214,7 @@ public class Test6_ObservableOpertaor {
                         Throwable::printStackTrace,
                         () -> System.out.println("OnComplete is called"));
 
-        for (int i = 0; i < expectedItems.size(); i++) {
-            Assert.assertEquals(expectedItems.get(i), receivedItems.get(i));
-        }
+        assertListEquals(receivedItems, expectedItems);
     }
 
 
@@ -250,9 +239,7 @@ public class Test6_ObservableOpertaor {
                         Throwable::printStackTrace,
                         () -> System.out.println("OnComplete is called"));
 
-        for (int i = 0; i < expectedItems.size(); i++) {
-            Assert.assertEquals(expectedItems.get(i), receivedItems.get(i));
-        }
+        assertListEquals(receivedItems, expectedItems);
     }
 
     /**
@@ -286,9 +273,7 @@ public class Test6_ObservableOpertaor {
         } finally {
             disposable.dispose();
         }
-        for (int i = 0; i < expectedItems.size(); i++) {
-            Assert.assertEquals(expectedItems.get(i), receivedItems.get(i));
-        }
+        assertLongListEquals(receivedItems, expectedItems);
     }
 
     /**
@@ -314,9 +299,7 @@ public class Test6_ObservableOpertaor {
                         Throwable::printStackTrace,
                         () -> System.out.println("OnComplete is called"));
 
-        for (int i = 0; i < expectedItems.size(); i++) {
-            Assert.assertEquals(expectedItems.get(i), receivedItems.get(i));
-        }
+        assertListEquals(receivedItems, expectedItems);
     }
 
 
@@ -344,8 +327,6 @@ public class Test6_ObservableOpertaor {
                         Throwable::printStackTrace,
                         () -> System.out.println("OnComplete is called"));
 
-        for (int i = 0; i < expectedItems.size(); i++) {
-            Assert.assertEquals(expectedItems.get(i), receivedItems.get(i));
-        }
+        assertListEquals(receivedItems, expectedItems);
     }
 }

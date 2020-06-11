@@ -6,7 +6,7 @@ seen:
 - just()
 - fromIterable()
 
-Now we will others useful creators:
+Now we will have a look at others useful creators:
 - range
 - interval
 
@@ -44,7 +44,7 @@ I will let you emit a tick every second or any period you want:
 ```
 
 You also have some range to add an initial delay, to use a specific
-scheduler or use intervalRange for emitting integer or long.
+scheduler or use intervalRange for emitting integer or long.  
 ** WARNING when using interval, the subscribe is not blocking the Thread.  
  It's a non blocking observable. It will call the method and drop it in the Thread.**
 
@@ -109,8 +109,6 @@ public static Observable<String> getDefer() {
                 return "Obs " + Answer4_Observable_Creators.text + " integer";
             });
     return observable2;
-//    return Observable.range(0, timeInterval*4)
-//            .map(integer -> "Obs " + Answer4_Observable_Creators.text + " integer");
     }
 ```
 In another class, we want to use this ticker, but a first observer want a tick every second, and the other one, want a tick every two seconds:
@@ -125,7 +123,7 @@ In another class, we want to use this ticker, but a first observer want a tick e
                 th -> System.out.println("UndeliverableException should be received"),//not called
                 () -> System.out.println("On complete is called"));//not called
 
-        //Without Defer, the same observer is used, so your changes won't be took into account
+        //Without Defer, the same observable instance is used, so your changes won't be took into account
         Answer4_Observable_Creators.timeInterval = 2;
         observable.subscribe(letter -> {
                     numberOfLoop1++;
@@ -172,7 +170,7 @@ And it will just work:
                 () -> System.out.println("On complete is called"));//not called
 
         Answer4_Observable_Creators.timeInterval = 2;
-        //With Defer, the observer is recreated by calling again Answer4_Observable_Creators.getDefer(),
+        //With Defer, the observable instance is recreated by calling again Answer4_Observable_Creators.getDefer(),
         // so your changes will be took into account because a brand new Observable is created
         observableDefered.subscribe(letter -> {
                     numberOfLoop2++;

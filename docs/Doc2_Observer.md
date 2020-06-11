@@ -1,6 +1,6 @@
 # Chapter 2: Observer
 
-Creating an Observer to listen for the data stream of observable. Let's
+Creating an Observer to listen for the data stream of observables. Let's
 suppose we have the observable from chapter one:
 
 ```java

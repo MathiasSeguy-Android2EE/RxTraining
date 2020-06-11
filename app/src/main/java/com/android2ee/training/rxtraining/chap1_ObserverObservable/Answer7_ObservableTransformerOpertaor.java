@@ -8,7 +8,10 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
+import io.reactivex.Maybe;
 import io.reactivex.Observable;
+import io.reactivex.Single;
+import io.reactivex.schedulers.Schedulers;
 
 /**
  * Created by Mathias Seguy also known as Android2ee on 16/04/2020.
@@ -136,10 +139,94 @@ public class Answer7_ObservableTransformerOpertaor {
 
 
     /**
-     * Using the observableSrc return a stream that returns elements that start with firstLetter
-     * if no elements found  add the firstLetter to the days of the week and return them
+     *  Using the observableSrc return a stream ordered by words's length
      */
     public static Observable<String> getObservableSortedByLength() {
         return observableSrc.sorted((item1, item2) -> Integer.compare(item1.length(), item2.length()));
+    }
+
+
+    /**
+     * Using the observableSrc return a stream ordered by words's length
+     */
+    public static Observable<String> getObservableDelayed() {
+        return observableSrc.delay(3, TimeUnit.SECONDS, Schedulers.computation(), false);
+    }
+
+    /**
+     * Using the observableSrc return twice the 3 first days of the week week
+     */
+    public static Observable<String> getObservableRepeat() {
+        return observableSrc.take(3).repeat(2);
+    }
+
+    /**
+     * Using the observableSrc test scan
+     */
+    public static Observable<String> getObservableScanStupid() {
+        return observableSrc.scan((accumulator, next) -> accumulator);
+    }
+
+
+    /**
+     * Using the observableSrc return the list of the days of the week split by a ','
+     */
+    public static Observable<String> getObservableScan() {
+        return observableSrc.scan((accumulator, next) -> accumulator + ", " + next).takeLast(1);
+    }
+
+
+    /**
+     * Using the observableSrc return the accumulate length of each days
+     */
+    public static Observable<Integer> getObservableScanWithInitializer() {
+        return observableSrc.scan(0, (accumulator, next) -> accumulator + next.length());
+    }
+
+
+    /**
+     * Using the observableSrc return the list of the day split by a coma
+     */
+    public static Maybe<String> getObservableReduce() {
+        return observableSrc.reduce((accumulator, next) -> accumulator + ", " + next);
+    }
+
+    /**
+     * Using the observableSrc return the accumulate length of each days
+     */
+    public static Single<Integer> getObservableReduceWithInitializer() {
+        return observableSrc.reduce(0, (accumulator, next) -> accumulator + next.length());
+    }
+
+
+    /**
+     * Using the observableSrc return the number of days in a week
+     */
+    public static Single<Long> getObservableCount() {
+        return observableSrc.count();
+    }
+
+
+    /**
+     * Using the observableSrc return true if all the day are called Wednesday
+     */
+    public static Single<Boolean> getObservableAll() {
+        return observableSrc.all(item -> item.equals("Wednesday"));
+    }
+
+
+    /**
+     * Using the observableSrc return true if there is a day called Wednesday
+     */
+    public static Single<Boolean> getObservableAny() {
+        return observableSrc.any(item -> item.equals("Wednesday"));
+    }
+
+
+    /**
+     * Using the observableSrc return true if the items emitted contains Wednesday
+     */
+    public static Single<Boolean> getObservableContains() {
+        return observableSrc.contains("Wednesday");
     }
 }

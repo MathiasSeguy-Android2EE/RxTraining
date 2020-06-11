@@ -1,15 +1,20 @@
 package com.android2ee.training.rxtraining.chap1_ObserverObservable.questions;
 //
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
+import io.reactivex.Maybe;
 import io.reactivex.Observable;
+import io.reactivex.Single;
 
 /**
  * Created by Mathias Seguy also known as Android2ee on 16/04/2020.
  * The goal of this class is to understand operators on Observable:
  */
 public class Question7_ObservableTransformerOpertaor {
+
     private static final Observable<String> observableSrc = Observable.just(
             "Monday",
             "Tuesday",
@@ -19,6 +24,37 @@ public class Question7_ObservableTransformerOpertaor {
             "Saturday",
             "Sunday"
     );
+    private static Map<String, String> morse = new HashMap<>();
+
+    static {
+        morse.put("a", ".-");
+        morse.put("b", "-...");
+        morse.put("c", "-.-.");
+        morse.put("d", "-..");
+        morse.put("e", ".");
+        morse.put("f", "..-.");
+        morse.put("g", "--.-");
+        morse.put("h", "....");
+        morse.put("i", "..");
+        morse.put("j", ".---");
+        morse.put("k", "-.-");
+        morse.put("l", ".-..");
+        morse.put("m", "--");
+        morse.put("n", "-.");
+        morse.put("o", "---");
+        morse.put("p", ".--.");
+        morse.put("q", "--.-");
+        morse.put("r", ".-.");
+        morse.put("s", "...");
+        morse.put("t", "-");
+        morse.put("u", "..-");
+        morse.put("v", "...-");
+        morse.put("w", ".--");
+        morse.put("x", "-..-");
+        morse.put("y", "-.--");
+        morse.put("z", "--..");
+    }
+
     private static final Observable<String> observableSrcDuplicated = Observable.fromArray(
             "Monday",
             "Monday",
@@ -30,6 +66,7 @@ public class Question7_ObservableTransformerOpertaor {
             "Thursday",
             "Friday",
             "Friday",
+            "Tuesday",
             "Saturday",
             "Saturday",
             "Sunday",
@@ -38,72 +75,141 @@ public class Question7_ObservableTransformerOpertaor {
     private static final Observable<Long> observableIntervalSrc = Observable.interval(1, TimeUnit.SECONDS);
 
     /**
-     * Using the observableSrc return elements that start with a "s"
+     * Using the observableSrc return the associated morse code
      */
-    public static Observable<String> getObservableFiltered() {
-        return observableSrc;//todo
+    public static Observable<String> getObservableMap() {
+        return observableSrc;//TODO
     }
 
     /**
-     * Using the observableSrc return the first 3 elements of the list
+     * Using the observableSrc return a stream that starts with "Days of the week are: "
      */
-    public static Observable<String> getObservableTakeElement() {
-        return observableSrc;//todo
+    public static Observable<String> getObservableStartWith() {
+        return observableSrc;//TODO
     }
 
     /**
-     * Using the observableIntervalSrc return the elements emitted during the 3 first seconds
+     * Using the observableSrc return a stream that returns elements that start with firstLetter
+     * if no elements found return "empty"
      */
-    public static Observable<Long> getObservableTakeDuration() {
-        return observableIntervalSrc;//todo
+    public static Observable<String> getObservableDefaultIfEmpty(String firstLetter) {
+        return observableSrc;//TODO
+    }
+
+
+    /**
+     * Using the observableSrc return a stream that returns elements that start with firstLetter
+     * if no elements found  add the firstLetter to the days of the week and return them
+     */
+    public static Observable<String> getObservableSwitchIfEmpty(String firstLetter) {
+        return observableSrc;//TODO
+    }
+
+
+    /**
+     * Using the observableSrc return a stream ordered by alphabetic order
+     */
+    public static Observable<String> getObservableSorted() {
+        return observableSrc;//TODO
     }
 
     /**
-     * Using the observableIntervalSrc return the first elements until the size of the element is smaller than 7 letters
+     * Using the observableSrc return a stream ordered by alphabetic order
      */
-    public static Observable<Long> getObservableTakeWhile() {
-        return observableIntervalSrc;//todo
+    public static Observable<String> getObservableSortedReverse() {
+        return observableSrc;//TODO
+    }
+
+
+    /**
+     * Using the observableSrc return a stream ordered by words's length
+     */
+    public static Observable<String> getObservableSortedByLength() {
+        return observableSrc;//TODO
+    }
+
+
+    /**
+     * Using the observableSrc return a stream ordered by words's length
+     */
+    public static Observable<String> getObservableDelayed() {
+        return observableSrc;//TODO
     }
 
     /**
-     * Using the observableSrc return the elements of the list expect the first 3 ones
+     * Using the observableSrc return twice the 3 first days of the week week
      */
-    public static Observable<String> getObservableSkipElement() {
-        return observableSrc;//todo
+    public static Observable<String> getObservableRepeat() {
+        return observableSrc;//TODO
     }
 
     /**
-     * Using the observableSrc return the last 3 elements of the list
+     * Using the observableSrc test scan
      */
-    public static Observable<String> getObservableSkipLastElement() {
-        return observableSrc;//todo
+    public static Observable<String> getObservableScanStupid() {
+        return observableSrc;//TODO
+    }
+
+
+    /**
+     * Using the observableSrc return the list of the days of the week split by a ','
+     */
+    public static Observable<String> getObservableScan() {
+        return observableSrc;//TODO
+    }
+
+
+    /**
+     * Using the observableSrc return the accumulate length of each days
+     */
+    public static Observable<Integer> getObservableScanWithInitializer() {
+        return null;//TODO
+    }
+
+
+    /**
+     * Using the observableSrc return the list of the day split by a coma
+     */
+    public static Maybe<String> getObservableReduce() {
+        return null;//TODO
     }
 
     /**
-     * Using the observableSrc return the elements of the list a soon as one elements has more than 7 letters
+     * Using the observableSrc return the accumulate length of each days
      */
-    public static Observable<String> getObservableSkipWhileElement() {
-        return observableSrc;//todo
+    public static Single<Integer> getObservableReduceWithInitializer() {
+        return null;//TODO
     }
 
-    /**
-     * Using the observableIntervalSrc return the elements emitted after the 3 first seconds
-     */
-    public static Observable<Long> getObservableSkipDuration() {
-        return observableIntervalSrc;//todo
-    }
 
     /**
-     * Using the observableSrcDuplicated return the elements of the list with no item's duplication
+     * Using the observableSrc return the number of days in a week
      */
-    public static Observable<String> getObservableDistinct() {
-        return observableSrcDuplicated;//todo
+    public static Single<Long> getObservableCount() {
+        return null;//TODO
     }
 
+
     /**
-     * Using the observableSrcDuplicated return the elements of the list with no item's duplication
+     * Using the observableSrc return true if all the day are called Wednesday
      */
-    public static Observable<String> getObservableDistinctUntilChanges() {
-        return observableSrcDuplicated;//todo
+    public static Single<Boolean> getObservableAll() {
+        return null;//TODO
+    }
+
+
+    /**
+     * Using the observableSrc return true if there is a day called Wednesday
+     */
+    public static Single<Boolean> getObservableAny() {
+        return null;//TODO
+    }
+
+
+    /**
+     * Using the observableSrc return true if the items emitted contains Wednesday
+     */
+    public static Single<Boolean> getObservableContains() {
+        return null;//TODO
     }
 }

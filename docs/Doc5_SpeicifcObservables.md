@@ -262,7 +262,7 @@ Testing one item main
 Value= 1 [Thread] main
 ```
 
-## [Compleatble]
+## Completable
 Completable is a specific Observable that will emits only onComplete. The goal is to run an operation and prevent observer that it's done.  
  You can use FromRunnable to create it. There are a lot of creators for this Observable.
 
@@ -307,13 +307,13 @@ CompletableObserver completableObserver=new CompletableObserver() {
 
 
 [Chapter 4 : Observables Basics Creators](Doc4_ObservableCreators.md)  
-[Chapter 5 : Dispoable, Single, Maybe and Completable concepts](Doc5_SpeicifcObservables.md)  
+[Chapter 6: Observable operators](Doc6_ObservableOpertaor.md)  
 [TableOfContent](index.md)
 
 [Disposable]: #disposable
 [Single]: #single
 [Maybe]: #maybe
-[Compleatble]: #compleatble
+[Completable]: #completable
 
 
 

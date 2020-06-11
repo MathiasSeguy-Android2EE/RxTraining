@@ -195,7 +195,7 @@ the same data set.
 ## 3 Observers subscribe() to a hot Observable in the different Threads
 
 For starting to understand what happens, let's just make it simple:
-subscribe twice to the hot observable and run the Observable and the
+subscribe twice to the hot observable and run the
 Observable in another thread and see what happens.  
 To switch Thread we will use subscribeOn, we will see in another
 chapter.

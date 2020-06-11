@@ -8,6 +8,12 @@ import org.junit.Test;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+
+import static com.android2ee.training.rxtraining.chap1_ObserverObservable.TestUtils.assertIntegerListEquals;
+import static com.android2ee.training.rxtraining.chap1_ObserverObservable.TestUtils.assertListEquals;
+import static com.android2ee.training.rxtraining.chap1_ObserverObservable.TestUtils.daysOfTheWeekSortedByLength;
+import static com.android2ee.training.rxtraining.chap1_ObserverObservable.TestUtils.resultsSorted;
+import static com.android2ee.training.rxtraining.chap1_ObserverObservable.TestUtils.resultsSortedReverse;
 // 
 
 /**
@@ -16,14 +22,6 @@ import java.util.List;
  */
 public class Test7_ObservableTransformerOpertaor {
     private static final String TAG = "ObserverObservableTest";
-
-    public String[] daysOfTheWeek = {"Monday",
-            "Tuesday",
-            "Wednesday",
-            "Thursday",
-            "Friday",
-            "Saturday",
-            "Sunday"};
 
     @Before
     public void setUp() throws Exception {
@@ -96,11 +94,6 @@ public class Test7_ObservableTransformerOpertaor {
         assertListEquals(receivedItems, expectedItems);
     }
 
-    private void assertListEquals(List<String> receivedItems, List<String> expectedItems) {
-        for (int i = 0; i < expectedItems.size(); i++) {
-            Assert.assertEquals(expectedItems.get(i), receivedItems.get(i));
-        }
-    }
 
     /**
      * OutPut result:
@@ -191,33 +184,6 @@ public class Test7_ObservableTransformerOpertaor {
      */
     @Test
     public void testSorted() {
-        String[] resultsSorted = {
-                "Friday",
-                "Monday",
-                "Saturday",
-                "Sunday",
-                "Thursday",
-                "Tuesday",
-                "Wednesday",
-        };
-        String[] resultsSortedReverse = {
-                "Wednesday",
-                "Tuesday",
-                "Thursday",
-                "Sunday",
-                "Saturday",
-                "Monday",
-                "Friday",
-        };
-        String[] resultsSortedByLength = {
-                "Monday",
-                "Friday",
-                "Sunday",
-                "Tuesday",
-                "Thursday",
-                "Saturday",
-                "Wednesday",
-        };
 
         List<String> receivedItems = new ArrayList(7);
         /***********************************************************
@@ -258,7 +224,186 @@ public class Test7_ObservableTransformerOpertaor {
                         Throwable::printStackTrace,
                         () -> System.out.println("OnComplete is called"));
 
-        assertListEquals(receivedItems, Arrays.asList(resultsSortedByLength));
+        assertListEquals(receivedItems, Arrays.asList(daysOfTheWeekSortedByLength));
     }
 
+    /**
+     * OutPut result:
+     * value is Monday
+     * value is Tuesday
+     * value is Wednesday
+     * value is Monday
+     * value is Tuesday
+     * value is Wednesday
+     * OnComplete is called
+     */
+    @Test
+    public void testRepeat() {
+        List<String> receivedItems = new ArrayList(8);
+        String[] results = {"Monday", "Tuesday", "Wednesday",
+                "Monday", "Tuesday", "Wednesday"};
+        List<String> expectedItems = Arrays.asList(results);
+        Answer7_ObservableTransformerOpertaor.getObservableRepeat()
+                .subscribe(value -> {
+                            System.out.println("value is " + value);
+                            receivedItems.add(value);
+                        },
+                        Throwable::printStackTrace,
+                        () -> System.out.println("OnComplete is called"));
+
+        assertListEquals(receivedItems, expectedItems);
+    }
+
+
+    /**
+     * OutPut result:     *
+     * value is Monday
+     * value is Monday
+     * value is Monday
+     * value is Monday
+     * value is Monday
+     * value is Monday
+     * value is Monday
+     * OnComplete is called
+     */
+    @Test
+    public void testScanStupid() {
+        List<String> receivedItems = new ArrayList(7);
+        String[] results = {"Monday", "Monday", "Monday", "Monday",
+                "Monday", "Monday", "Monday"};
+        List<String> expectedItems = Arrays.asList(results);
+        Answer7_ObservableTransformerOpertaor.getObservableScanStupid()
+                .subscribe(value -> {
+                            System.out.println("value is " + value);
+                            receivedItems.add(value);
+                        },
+                        Throwable::printStackTrace,
+                        () -> System.out.println("OnComplete is called"));
+
+        assertListEquals(receivedItems, expectedItems);
+    }
+
+    /**
+     * OutPut result:
+     * value is Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday
+     * OnComplete is called
+     */
+    @Test
+    public void testScan() {
+        List<String> receivedItems = new ArrayList(1);
+        String[] results = {"Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday"};
+        List<String> expectedItems = Arrays.asList(results);
+        Answer7_ObservableTransformerOpertaor.getObservableScan()
+                .subscribe(value -> {
+                            System.out.println("value is " + value);
+                            receivedItems.add(value);
+                        },
+                        Throwable::printStackTrace,
+                        () -> System.out.println("OnComplete is called"));
+
+        assertListEquals(receivedItems, expectedItems);
+    }
+
+
+    /**
+     * OutPut result:
+     * value is 0
+     * value is 6
+     * value is 13
+     * value is 22
+     * value is 30
+     * value is 36
+     * value is 44
+     * value is 50
+     * OnComplete is called
+     */
+    @Test
+    public void testScanWithInitializer() {
+        List<Integer> receivedItems = new ArrayList(8);
+        Integer[] results = {0, 6, 13, 22, 30, 36, 44, 50};
+        List<Integer> expectedItems = Arrays.asList(results);
+        Answer7_ObservableTransformerOpertaor.getObservableScanWithInitializer()
+                .subscribe(value -> {
+                            System.out.println("value is " + value);
+                            receivedItems.add(value);
+                        },
+                        Throwable::printStackTrace,
+                        () -> System.out.println("OnComplete is called"));
+
+        assertIntegerListEquals(receivedItems, expectedItems);
+    }
+
+    /**
+     * OutPut result:
+     * value is Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday
+     * OnComplete is called
+     */
+    @Test
+    public void testReduce() {
+        List<String> receivedItems = new ArrayList(1);
+        String[] results = {"Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday"};
+        List<String> expectedItems = Arrays.asList(results);
+        Answer7_ObservableTransformerOpertaor.getObservableReduce()
+                .subscribe(value -> {
+                            System.out.println("value is " + value);
+                            receivedItems.add(value);
+                        },
+                        Throwable::printStackTrace,
+                        () -> System.out.println("OnComplete is called"));
+
+        assertListEquals(receivedItems, expectedItems);
+    }
+
+    /**
+     * OutPut result:
+     * value is 50
+     * OnComplete is called
+     */
+    @Test
+    public void testReduceWithInitializer() {
+        List<Integer> receivedItems = new ArrayList(1);
+        Integer[] results = {50};
+        List<Integer> expectedItems = Arrays.asList(results);
+        Answer7_ObservableTransformerOpertaor.getObservableReduceWithInitializer()
+                .subscribe(value -> {
+                            System.out.println("value is " + value);
+                            receivedItems.add(value);
+                        },
+                        Throwable::printStackTrace);
+
+        assertIntegerListEquals(receivedItems, expectedItems);
+    }
+
+    /**
+     * OutPut result:
+     * value is 50
+     * OnComplete is called
+     */
+    @Test
+    public void testCount() {
+        Answer7_ObservableTransformerOpertaor.getObservableCount()
+                .subscribe(value -> {
+                            System.out.println("value is " + value);
+                            Assert.assertEquals(7L, 0L + value);
+                        },
+                        Throwable::printStackTrace);
+    }
+
+
+    /**
+     * OutPut result:
+     * value is False
+     * value is True
+     * value is True
+     * OnComplete is called
+     */
+    @Test
+    public void testAllAnyContains() {
+        Answer7_ObservableTransformerOpertaor.getObservableAll()
+                .subscribe(value -> Assert.assertFalse(value));
+        Answer7_ObservableTransformerOpertaor.getObservableAny()
+                .subscribe(value -> Assert.assertTrue(value));
+        Answer7_ObservableTransformerOpertaor.getObservableContains()
+                .subscribe(value -> Assert.assertTrue(value));
+    }
 }
