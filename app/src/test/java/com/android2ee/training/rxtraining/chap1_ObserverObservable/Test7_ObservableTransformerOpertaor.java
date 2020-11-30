@@ -75,7 +75,7 @@ public class Test7_ObservableTransformerOpertaor {
     @Test
     public void testStartWith() {
         List<String> receivedItems = new ArrayList(8);
-        String[] results = {"Days of the week are:", "Monday",
+        String[] results = {"Days of the week are: ", "Monday",
                 "Tuesday",
                 "Wednesday",
                 "Thursday",
@@ -91,6 +91,8 @@ public class Test7_ObservableTransformerOpertaor {
                         Throwable::printStackTrace,
                         () -> System.out.println("OnComplete is called"));
 
+        System.out.println("receivedItems is " + receivedItems);
+        System.out.println("expectedItems is " + expectedItems);
         assertListEquals(receivedItems, expectedItems);
     }
 

@@ -107,7 +107,7 @@ public class Answer6_ObservableOpertaor {
      * Using the observableIntervalSrc return the elements emitted after the 3 first seconds
      */
     public static Observable<Long> getObservableSkipDuration() {
-        return observableIntervalSrc.skip(3, TimeUnit.SECONDS);
+        return observableIntervalSrc.skip(2900, TimeUnit.MILLISECONDS);
     }
 
     /**

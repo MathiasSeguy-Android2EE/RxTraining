@@ -53,7 +53,7 @@ public class Test4_ObservableCreators {
                 Throwable::printStackTrace,
                 countDownLatch::countDown);
         try {
-            countDownLatch.await(10, TimeUnit.SECONDS);
+            countDownLatch.await(10500, TimeUnit.MILLISECONDS);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }

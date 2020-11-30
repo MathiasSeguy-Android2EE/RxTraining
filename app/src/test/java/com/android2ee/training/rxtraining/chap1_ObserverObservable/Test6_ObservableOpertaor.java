@@ -267,7 +267,11 @@ public class Test6_ObservableOpertaor {
                             countDownLatch.countDown();
                         });
         try {
-            countDownLatch.await(5, TimeUnit.SECONDS);
+            //Stop the thread after 5,5s of emission
+            //=> after 2.9s items 3 is emitted,
+            //at 4s emitted 4
+            //at 5 emitted 5, then die
+            countDownLatch.await(5500, TimeUnit.MILLISECONDS);
         } catch (InterruptedException e) {
             e.printStackTrace();
         } finally {

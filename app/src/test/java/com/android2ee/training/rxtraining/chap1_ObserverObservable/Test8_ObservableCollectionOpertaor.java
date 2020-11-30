@@ -118,12 +118,13 @@ public class Test8_ObservableCollectionOpertaor {
      */
     @Test
     public void testCollect() {
-        List<String> expectedItems = Arrays.asList(daysOfTheWeekSortedByLength);
+        List<String> expectedItems = Arrays.asList(daysOfTheWeek);
         ArrayList<String> resultList = new ArrayList<>(7);
         Answer8_ObservableCollectionOpertaor.getObservableCollect(resultList)
                 .subscribe(value -> {
                             System.out.println("value is " + value);
-//                            assertListEquals( expectedItems,value);
+                            System.out.println("expected value is " + expectedItems);
+                            assertListEquals(expectedItems, value);
                         },
                         Throwable::printStackTrace);
         assertListEquals(resultList, expectedItems);

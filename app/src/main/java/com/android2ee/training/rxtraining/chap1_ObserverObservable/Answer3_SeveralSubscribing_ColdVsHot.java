@@ -56,7 +56,7 @@ public class Answer3_SeveralSubscribing_ColdVsHot {
             int numberOfWinner = 0;
             while (lotoIsOpen) {
                 int value = (int) (Math.random() * 1_000);
-                if (value > 800) {
+                if (value > 500) {
                     System.out.println("hotObserable[Thread]=" + Thread.currentThread().getName() + "value is " + value);
                     emiter.onNext(value);
                     numberOfWinner++;
