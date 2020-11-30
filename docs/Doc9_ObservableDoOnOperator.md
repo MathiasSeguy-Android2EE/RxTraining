@@ -1,3 +1,8 @@
+This chapter is a small part of a biggest training project, you can find on [Github](https://github.com/MathiasSeguy-Android2EE/RxTraining).
+You'll have the main branch with the answers/responses/unit tests and documentation. You could start with the "questions" branch to only have the questions
+You'll have the full table of content of the articles on [Medium](https://medium.com/@android2ee)
+You can download the book on [Android2ee](https://www.android2ee.com/)
+
 # Chapter 9: Observable's action operators
 We will see the following actions on Observables:
 To manage emitted events (we'll see that's not absolutely true) :
@@ -424,7 +429,7 @@ They will all act the same: Do the last action and complete the chain. You will 
     }
    
     /**
-     * OutPut result:
+     * OutPut result:d
      * value emitted is Monday
      * value emitted is Bad day
      * onCompleteCalled
